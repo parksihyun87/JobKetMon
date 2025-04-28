@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.Random;
 import java.util.Scanner;
 
 public class Battle {
@@ -61,26 +62,42 @@ public class Battle {
             while(true){
                 Scanner input= new Scanner(System.in);
                 PMAction looser=null;
+                Random ranNum1= new Random();
+                int ran1=ranNum1.nextInt(100)+1;
+                Random ranNum2= new Random();
+                int ran2=ranNum2.nextInt(100)+1;
                 System.out.println("내 잡키먼 행동 입력");
-                System.out.println("1"+((JobKiMon) myJobKiMon).s1name+"사용");
-                System.out.println("2"+((JobKiMon) myJobKiMon).s2name+"사용");
+                System.out.println("1. "+((JobKiMon) myJobKiMon).s1name+"사용");
+                System.out.println("2. "+((JobKiMon) myJobKiMon).s2name+"사용");
                 int inputNumber=input.nextInt();
                 input.nextLine();
 
                 switch (inputNumber){
                     case 1:
-                        if(Math.random()*100+1> (100-((JobKiMon) myJobKiMon).getS1precent())){
+                        if(ran1> (100-((JobKiMon) myJobKiMon).getS1precent()) && ran1<= 85 ){
                             ((JobKiMon) oppenent).setHp(((JobKiMon) oppenent).getHp()-((JobKiMon) myJobKiMon).getS1dmg());
-                            System.out.println("dmg"+((JobKiMon) myJobKiMon).getS1dmg());
+                            System.out.println(((JobKiMon) myJobKiMon).getS1name()+"로 적에게 "+((JobKiMon) myJobKiMon).getS1dmg()+"의 데미지를 입혔다.");
+                            System.out.println("현재 적 hp:"+((JobKiMon) oppenent).getHp());
+                        } else if(ran1 > 85 && ran1 <= 100 ) {
+                            ((JobKiMon) oppenent).setHp( ((JobKiMon) oppenent).getHp()-((JobKiMon) myJobKiMon).getS1dmg()*2);
+                            System.out.println(((JobKiMon) myJobKiMon).getName()+"이(가) 갑자기 거다이맥스 기술을 날렸다.");
+                            System.out.println(((JobKiMon) myJobKiMon).getS1name()+"로 적에게 "+((JobKiMon) myJobKiMon).getS1dmg()*2+"의 데미지를 입혔다.");
+                            System.out.println("효과는 굉장했다.");
                             System.out.println("현재 적 hp:"+((JobKiMon) oppenent).getHp());
                         } else {
                             System.out.println("기술 실패");
                         }
                         break;
                     case 2:
-                        if(Math.random()*100+1> (100-((JobKiMon) myJobKiMon).getS2precent())){
+                        if(ran1> (100-((JobKiMon) myJobKiMon).getS2precent())&& ran1<= 85){
                             ((JobKiMon) oppenent).setHp(((JobKiMon) oppenent).getHp()-((JobKiMon) myJobKiMon).getS2dmg());
-                            System.out.println("dmg"+((JobKiMon) myJobKiMon).getS2dmg());
+                            System.out.println(((JobKiMon) myJobKiMon).getS2name()+"로 적에게 "+((JobKiMon) myJobKiMon).getS2dmg()+"의 데미지를 입혔다.");
+                            System.out.println("현재 적 hp:"+((JobKiMon) oppenent).getHp());
+                        } else if(ran1 > 85 && ran1 <= 100 ){
+                            ((JobKiMon) oppenent).setHp(((JobKiMon) oppenent).getHp()-((JobKiMon) myJobKiMon).getS2dmg()*2);
+                            System.out.println(((JobKiMon) myJobKiMon).getName()+"이(가) 갑자기 거다이맥스 기술을 날렸다.");
+                            System.out.println(((JobKiMon) myJobKiMon).getS2name()+"로 적에게 "+((JobKiMon) myJobKiMon).getS2dmg()*2+"의 데미지를 입혔다.");
+                            System.out.println("효과는 굉장했다.");
                             System.out.println("현재 적 hp:"+((JobKiMon) oppenent).getHp());
                         } else {
                             System.out.println("기술 실패");
@@ -132,9 +149,9 @@ public class Battle {
                 }
 
                 System.out.println("상대턴");
-                if(Math.random()*100+1 > (100-((JobKiMon) oppenent).getS1precent())){
+                if(ran2 > (100-((JobKiMon) oppenent).getS1precent())){
                     ((JobKiMon) myJobKiMon).setHp(((JobKiMon) myJobKiMon).getHp()-((JobKiMon) oppenent).getS1dmg());
-                    System.out.println("dmg"+((JobKiMon) oppenent).getS1dmg());
+                    System.out.println("상대가 "+((JobKiMon) oppenent).getS1name()+"로 "+((JobKiMon) oppenent).getS1dmg()+"의 데미지를 입혔다.");
                     System.out.println("내 hp "+((JobKiMon) myJobKiMon).getHp());
                 } else {
                     System.out.println("기술 실패");

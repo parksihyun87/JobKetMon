@@ -7,12 +7,14 @@ public class JobKetMonManager {
     String mCurrentUser;
     ArrayList<PMAction> mJobKiMonBox= new ArrayList<>();
     FireField mFire = new FireField();
+    ElectricField mElec = new ElectricField();
     // 자료형으로 변수 만들고 뉴는 생성자 함수로 (뉴와, 자료형이름의 생성자 함수와, ())3개가 꼭 필요하다.
 
     //전체 매니저 시작
     JobKetMonManager(){
         mJobKiMonBox.add(new electricMon("잡카츄",200,"쟙카쟙카","전기",20,80,"몸통박치기",10,80));
         mJobKiMonBox.add(new fireMon("파일리",200,"파일파일","불지지기",20,80,"꼬리치기",10,80));
+        mJobKiMonBox.add(new fireMon("불브이",200,"불브불브","불날리기",20,80,"불꽃베기",10,80));
     }
 
     public void run(){
@@ -23,7 +25,7 @@ public class JobKetMonManager {
         mCurrentUser=inputName;
 
         while(true){
-            System.out.println("<<잡켓몬 월드>>");
+            System.out.println("<<잡켓 로그>>");
             System.out.println("1.내 잡켓몬 보기");
             System.out.println("2.잡켓몬 모험하기");
             System.out.println("3.종료하기");
@@ -79,7 +81,7 @@ public class JobKetMonManager {
         while(true){
             System.out.println("어느 곳으로 탐험할까요");
             System.out.println("1. 불지대");
-//            System.out.println("2. 전기지대");
+            System.out.println("2. 전기지대");
             System.out.println("3. 메뉴로 돌아가기");
             int inputNum= input.nextInt();
             input.nextLine();
@@ -92,11 +94,11 @@ public class JobKetMonManager {
                     exitFlag2=true;
                     break;
 
-//                case 2:
-//                    Field iceField= new IceField();
-//                    iceField.introduce();
-//                    menuIntoElec();
-//                    break;
+                case 2:
+                    Field electricField= new ElectricField();
+                    electricField.introduce();
+                    menuIntoElec();
+                    break;
 
                 case 3:
                     exitFlag2=true;
@@ -111,9 +113,14 @@ public class JobKetMonManager {
         }//트루문 끝
     }// 로드어느벤쳐 메뉴 끝
 
-    // 지역 모드
+    // 지역 모드-불
     public void menuIntoFire(){
         mFire.callFireField(mJobKiMonBox);
+    }
+
+    // 지역 모드-전기
+    public void menuIntoElec(){
+        mElec.callElectricField(mJobKiMonBox);
     }
 
 }// 잡켓몬 매니저 클래스 끝
