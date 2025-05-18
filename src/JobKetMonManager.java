@@ -9,6 +9,8 @@ public class JobKetMonManager {
     FireField mFire = new FireField();
     ElectricField mElec = new ElectricField();
     // 자료형으로 변수 만들고 뉴는 생성자 함수로 (뉴와, 자료형이름의 생성자 함수와, ())3개가 꼭 필요하다.
+    MovingField mMoving = new MovingField();
+    //움직임 필드
 
     //전체 매니저 시작
     JobKetMonManager(){
@@ -28,7 +30,8 @@ public class JobKetMonManager {
             System.out.println("<<잡켓 로그>>");
             System.out.println("1.내 잡켓몬 보기");
             System.out.println("2.잡켓몬 모험하기");
-            System.out.println("3.종료하기");
+            System.out.println("3.엔딩보기");
+            System.out.println("4.종료하기");
             System.out.println("번호 입력");
             int inputNum= input.nextInt();
             input.nextLine();
@@ -37,11 +40,19 @@ public class JobKetMonManager {
                 case 1:
                     menuViewMyMon();
                     break;
-
                 case 2:
                     menuAdventure();
                     break;
                 case 3:
+                    if(mFire.fireList.size()==0 && mElec.elecList.size()==0){
+                        mMoving.movingField();
+                        exitFlag=true;
+                        break;
+                    }else{
+                        System.out.println("완료하지 못한 지대가 있습니다.");
+                    }
+                    break;
+                case 4:
                     exitFlag=true;
                     break;
             }
