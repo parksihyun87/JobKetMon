@@ -8,15 +8,16 @@ public class JobKetMonManager {
     ArrayList<PMAction> mJobKiMonBox= new ArrayList<>();
     FireField mFire = new FireField();
     ElectricField mElec = new ElectricField();
+    StrangerField mStranger = new StrangerField();
     // 자료형으로 변수 만들고 뉴는 생성자 함수로 (뉴와, 자료형이름의 생성자 함수와, ())3개가 꼭 필요하다.
     MovingField mMoving = new MovingField();
     //움직임 필드
 
     //전체 매니저 시작
     JobKetMonManager(){
-        mJobKiMonBox.add(new electricMon("잡카츄",200,"쟙카쟙카","전기",20,80,"몸통박치기",10,80));
-        mJobKiMonBox.add(new fireMon("파일리",200,"파일파일","불지지기",20,80,"꼬리치기",10,80));
-        mJobKiMonBox.add(new fireMon("불브이",200,"불브불브","불날리기",20,80,"불꽃베기",10,80));
+        mJobKiMonBox.add(new electricMon("잡카츄",200,"쟙카쟙카","전기",20,80,"몸통박치기",10,100));
+        mJobKiMonBox.add(new fireMon("파일리",200,"파일파일","불지지기",20,80,"꼬리치기",10,100));
+        mJobKiMonBox.add(new fireMon("불브이",200,"불브불브","불날리기",20,80,"불꽃베기",10,100));
     }
 
     public void run(){
@@ -44,7 +45,7 @@ public class JobKetMonManager {
                     menuAdventure();
                     break;
                 case 3:
-                    if(mFire.fireList.size()==0 && mElec.elecList.size()==0){
+                    if(mFire.fireList.size()==0 && mElec.elecList.size()==0 && mStranger.elecList.size()==0){
                         mMoving.movingField();
                         exitFlag=true;
                         break;

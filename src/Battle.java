@@ -36,7 +36,7 @@ public class Battle {
             }
 
 
-            //상대
+            //상대 선두 선택
             for(PMAction e: landList){
                 oppenent=e;
                 if (oppenent instanceof fireMon) {
@@ -46,7 +46,7 @@ public class Battle {
                 }
                 break;
             }
-            //나
+            //나 선두 선택
             for(PMAction myE: mJobKiMonBox){
                 myJobKiMon= myE;
                 if (myJobKiMon instanceof fireMon) {
@@ -62,10 +62,9 @@ public class Battle {
             while(true){
                 Scanner input= new Scanner(System.in);
                 PMAction looser=null;
-                Random ranNum1= new Random();
-                int ran1=ranNum1.nextInt(100)+1;
-                Random ranNum2= new Random();
-                int ran2=ranNum2.nextInt(100)+1;
+                Random ranNum= new Random();
+                int ran1=ranNum.nextInt(100)+1;
+                int ran2=ranNum.nextInt(100)+1;
                 System.out.println("내 잡키먼 행동 입력");
                 System.out.println("1. "+((JobKiMon) myJobKiMon).s1name+"사용");
                 System.out.println("2. "+((JobKiMon) myJobKiMon).s2name+"사용");
@@ -75,30 +74,18 @@ public class Battle {
                 switch (inputNumber){
                     case 1:
                         if(ran1> (100-((JobKiMon) myJobKiMon).getS1precent()) && ran1<= 85 ){
-                            ((JobKiMon) oppenent).setHp(((JobKiMon) oppenent).getHp()-((JobKiMon) myJobKiMon).getS1dmg());
-                            System.out.println(((JobKiMon) myJobKiMon).getS1name()+"로 적에게 "+((JobKiMon) myJobKiMon).getS1dmg()+"의 데미지를 입혔다.");
-                            System.out.println("현재 적 hp:"+((JobKiMon) oppenent).getHp());
+                            dmgOpNormal(myJobKiMon,oppenent,1);
                         } else if(ran1 > 85 && ran1 <= 100 ) {
-                            ((JobKiMon) oppenent).setHp( ((JobKiMon) oppenent).getHp()-((JobKiMon) myJobKiMon).getS1dmg()*2);
-                            System.out.println(((JobKiMon) myJobKiMon).getName()+"이(가) 갑자기 거다이맥스 기술을 날렸다.");
-                            System.out.println(((JobKiMon) myJobKiMon).getS1name()+"로 적에게 "+((JobKiMon) myJobKiMon).getS1dmg()*2+"의 데미지를 입혔다.");
-                            System.out.println("효과는 굉장했다.");
-                            System.out.println("현재 적 hp:"+((JobKiMon) oppenent).getHp());
+                            dmgOpCritical(myJobKiMon,oppenent,1);
                         } else {
                             System.out.println("기술 실패");
                         }
                         break;
                     case 2:
                         if(ran1> (100-((JobKiMon) myJobKiMon).getS2precent())&& ran1<= 85){
-                            ((JobKiMon) oppenent).setHp(((JobKiMon) oppenent).getHp()-((JobKiMon) myJobKiMon).getS2dmg());
-                            System.out.println(((JobKiMon) myJobKiMon).getS2name()+"로 적에게 "+((JobKiMon) myJobKiMon).getS2dmg()+"의 데미지를 입혔다.");
-                            System.out.println("현재 적 hp:"+((JobKiMon) oppenent).getHp());
+                            dmgOpNormal(myJobKiMon,oppenent,2);
                         } else if(ran1 > 85 && ran1 <= 100 ){
-                            ((JobKiMon) oppenent).setHp(((JobKiMon) oppenent).getHp()-((JobKiMon) myJobKiMon).getS2dmg()*2);
-                            System.out.println(((JobKiMon) myJobKiMon).getName()+"이(가) 갑자기 거다이맥스 기술을 날렸다.");
-                            System.out.println(((JobKiMon) myJobKiMon).getS2name()+"로 적에게 "+((JobKiMon) myJobKiMon).getS2dmg()*2+"의 데미지를 입혔다.");
-                            System.out.println("효과는 굉장했다.");
-                            System.out.println("현재 적 hp:"+((JobKiMon) oppenent).getHp());
+                            dmgOpCritical(myJobKiMon,oppenent,2);
                         } else {
                             System.out.println("기술 실패");
                         }
@@ -126,37 +113,23 @@ public class Battle {
                             }
                         }
                     }
-
-//                    // Iterator로 안전하게 제거
-//                    Iterator<PMAction> iterator = landList.iterator();
-//                    // 이리테이터 문
-//                    while (iterator.hasNext()) {
-//                        PMAction myE = iterator.next();
-//                        if (oppenent instanceof fireMon) {
-//                            fireMon newMyFireMon = (fireMon) myE;
-//                            if (newMyFireMon.getName().equals(((fireMon) oppenent).getName())) {
-//                                iterator.remove();
-//                            }
-//                        } else {
-//                            electricMon newMyElecMon = (electricMon) myE;
-//                            if (newMyElecMon.getName().equals(((electricMon) oppenent).getName())) {
-//                                iterator.remove();
-//                            }
-//                        }
-//                    }//이리테이터 끝.
-
                     break;
                 }
 
                 System.out.println("상대턴");
-                if(ran2 > (100-((JobKiMon) oppenent).getS1precent())){
-                    ((JobKiMon) myJobKiMon).setHp(((JobKiMon) myJobKiMon).getHp()-((JobKiMon) oppenent).getS1dmg());
-                    System.out.println("상대가 "+((JobKiMon) oppenent).getS1name()+"로 "+((JobKiMon) oppenent).getS1dmg()+"의 데미지를 입혔다.");
-                    System.out.println("내 hp "+((JobKiMon) myJobKiMon).getHp());
-                } else {
-                    System.out.println("기술 실패");
-                }
-
+//                int ranOp=ranNum.nextInt(2)+1;
+                int ran3=ranNum.nextInt(100)+1;
+//                switch (ranOp){
+//                    case 1:
+                        if(ran3 > (100-((JobKiMon) oppenent).getS1precent())){
+                            ((JobKiMon) myJobKiMon).setHp(((JobKiMon) myJobKiMon).getHp()-((JobKiMon) oppenent).getS1dmg());
+                            System.out.println("상대가 "+((JobKiMon) oppenent).getS1name()+"로 "+((JobKiMon) oppenent).getS1dmg()+"의 데미지를 입혔다.");
+                            System.out.println("내 hp "+((JobKiMon) myJobKiMon).getHp());
+                        } else {
+                            System.out.println("기술 실패");
+                        }
+//                        break;
+//                }
                 if(((JobKiMon) myJobKiMon).getHp()<=0){
                     looser=myJobKiMon;
                     String name= ((JobKiMon) myJobKiMon).name;
@@ -177,28 +150,50 @@ public class Battle {
                             }
                         }
                     }
-
-                    // Iterator로 안전하게 제거
-//                    Iterator<PMAction> iterator = mJobKiMonBox.iterator();
-//                    while (iterator.hasNext()) {
-//                        PMAction myE = iterator.next();
-//                        if (myJobKiMon instanceof fireMon) {
-//                            fireMon newMyFireMon = (fireMon) myE;
-//                            if (newMyFireMon.getName().equals(((fireMon) myJobKiMon).getName())) {
-//                                iterator.remove();
-//                            }
-//                        } else {
-//                            electricMon newMyElecMon = (electricMon) myE;
-//                            if (newMyElecMon.getName().equals(((electricMon) myJobKiMon).getName())) {
-//                                iterator.remove();
-//                            }
-//                        }
-//                    }
-
                     break;
                 }
             }//2차 와일문 끝
         }//와일문 끝
         return result;
     }//파이트 끝
+
+    //일반 히트시 출력 및 연산
+    private void dmgOpNormal(PMAction myJobKiMon, PMAction oppenent, int skillNum){
+        JobKiMon myMon = (JobKiMon) myJobKiMon;
+        JobKiMon enemy = (JobKiMon) oppenent;
+        String skillName;
+        int skillDmg;
+
+        if (skillNum == 1) {
+            skillName = myMon.getS1name();
+            skillDmg = myMon.getS1dmg();
+        } else {
+            skillName = myMon.getS2name();
+            skillDmg = myMon.getS2dmg();
+        }
+        enemy.setHp(enemy.getHp() - skillDmg);
+        System.out.println(skillName + "로 적에게 " + skillDmg + "의 데미지를 입혔다.");
+        System.out.println("현재 적 hp: " + enemy.getHp());
+    }
+    //거다이 히트시 출력 및 연산
+    private void dmgOpCritical(PMAction myJobKiMon, PMAction oppenent, int skillNum){
+        JobKiMon myMon = (JobKiMon) myJobKiMon;
+        JobKiMon enemy = (JobKiMon) oppenent;
+        String skillName;
+        int skillDmg;
+
+        if (skillNum == 1) {
+            skillName = myMon.getS1name();
+            skillDmg = myMon.getS1dmg();
+        } else {
+            skillName = myMon.getS2name();
+            skillDmg = myMon.getS2dmg();
+        }
+        enemy.setHp(enemy.getHp() - skillDmg*2);
+        System.out.println(myMon.getName()+"이(가) 갑자기 거다이맥스 기술을 날렸다.");
+        System.out.println(skillName + "로 적에게 " + skillDmg * 2 + "의 데미지를 입혔다.");
+        System.out.println("효과는 굉장했다.");
+        System.out.println("현재 적 hp: " + enemy.getHp());
+    }
+
 }

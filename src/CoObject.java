@@ -1,6 +1,6 @@
 public class CoObject {
     public MObject mObject;
-    private int x=0;
+    private int fieldWidth;
     private int y=0;
     String cString;
 
@@ -11,8 +11,9 @@ public class CoObject {
         this.y = y;
     }
 
-    public CoObject(int y, String cString) {
+    public CoObject(int y, int fieldWidth,String cString) {
         this.y = y;
+        this.fieldWidth = fieldWidth;
         this.cString = cString;
     }
 
@@ -24,20 +25,20 @@ public class CoObject {
         this.mObject = mObject;
     }
 
-    public int getX() {
-        return x;
-    }
-
-    public void setX(int x) {
-        this.x = x;
-    }
-
     public int getY() {
         return y;
     }
 
     public void setY(int y) {
         this.y = y;
+    }
+
+    public int getFieldWidth() {
+        return fieldWidth;
+    }
+
+    public void setFieldWidth(int fieldWidth) {
+        this.fieldWidth = fieldWidth;
     }
 
     public String getcString() {
