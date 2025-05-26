@@ -16,6 +16,7 @@ public class JobKetMonManager {
     //전체 매니저 시작
     JobKetMonManager(){
         mJobKiMonBox.add(new electricMon("잡카츄",200,"쟙카쟙카","전기",20,80,"몸통박치기",10,100));
+        mJobKiMonBox.add(new electricMon("쥬피산다",200,"쥬산쥬산","암페어공격",20,80,"몸통박치기",10,100));
         mJobKiMonBox.add(new fireMon("파일리",200,"파일파일","불지지기",20,80,"꼬리치기",10,100));
         mJobKiMonBox.add(new fireMon("불브이",200,"불브불브","불날리기",20,80,"불꽃베기",10,100));
     }
@@ -45,7 +46,7 @@ public class JobKetMonManager {
                     menuAdventure();
                     break;
                 case 3:
-                    if(mFire.fireList.size()==0 && mElec.elecList.size()==0 && mStranger.elecList.size()==0){
+                    if(mFire.fireList.size()==0 && mElec.elecList.size()==0){
                         mMoving.movingField();
                         exitFlag=true;
                         break;

@@ -68,8 +68,11 @@ public class ElectricField implements Field{
                     }
                 }
 
-            }
             System.out.println("답이 틀려 처음으로 돌아갑니다.");
+            }else if(confirm.equals("n")){
+                System.out.println("메뉴로 돌아갑니다.");
+                break;
+            }
         }
     }//콜 파이어필드 끝
 }//파필 클래스 끝

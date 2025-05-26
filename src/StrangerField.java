@@ -26,8 +26,8 @@ public class StrangerField implements Field{
 
         if(mBattle.fight(elecList,mJobKiMonBox)){
             System.out.println("'주절거림은 주절거림으로,,,그래도 인생에 있어 의미정도는 담아도 되겠지");
-            System.out.println("좋은 승부였다.'");
-            System.out.println("낯선 사람이 엔딩 배지를 주었습니다. 승리");
+//            System.out.println("좋은 승부였다.'");
+            System.out.println("낯선 사람이 전기 배지를 주었습니다. 승리");
         } else {
             System.out.println("패배");
         }
