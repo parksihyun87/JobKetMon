@@ -17,7 +17,8 @@ public class ElectricField implements Field{
         elecList.add(new electricMon("나이추",190,"나이나이","99만볼트",15,80,"번개멍때리기",0,80));
     }
 
-    public void callElectricField(ArrayList<PMAction> mJobKiMonBox){
+    public boolean callElectricField(ArrayList<PMAction> mJobKiMonBox){
+        boolean qtrue= false;
         for(PMAction eMon : elecList){
             //for문안에서는 자료형 변수 재선언 안됨.
             electricMon newMon = (electricMon) eMon;
@@ -32,7 +33,7 @@ public class ElectricField implements Field{
             System.out.println("패배");
         }
         while(true) {
-            boolean qtrue= false;
+
             System.out.println(" 망토를 뒤집어 쓴 수상한 사람이 중얼거리며 나타났다.");
             System.out.println("'과연 끝이란 있는가, 모두 영겁의 되풀이인 것을. 성취란 있는가, 금세 공허해질 것을.");
             System.out.println(" 친밀함 이란 있는가, 눈만 감아도 마음은 천리길 밖인 것을.");
@@ -62,7 +63,7 @@ public class ElectricField implements Field{
                             System.out.println("모두 정답이다.");
                             System.out.println("전투가 시작됩니다.");
                             stranger.introduce();
-                            stranger.callStrangerField(mJobKiMonBox);
+                            qtrue=stranger.callStrangerField(mJobKiMonBox);
                             break;
                         }
                     }
@@ -73,6 +74,11 @@ public class ElectricField implements Field{
                 System.out.println("메뉴로 돌아갑니다.");
                 break;
             }
+        }
+        if(qtrue){
+            return  true;
+        }else {
+            return false;
         }
     }//콜 파이어필드 끝
 }//파필 클래스 끝

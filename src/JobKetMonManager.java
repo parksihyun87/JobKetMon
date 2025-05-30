@@ -12,6 +12,7 @@ public class JobKetMonManager {
     // 자료형으로 변수 만들고 뉴는 생성자 함수로 (뉴와, 자료형이름의 생성자 함수와, ())3개가 꼭 필요하다.
     MovingField mMoving = new MovingField();
     //움직임 필드
+    boolean elecBadge=false;
 
     //전체 매니저 시작
     JobKetMonManager(){
@@ -46,7 +47,7 @@ public class JobKetMonManager {
                     menuAdventure();
                     break;
                 case 3:
-                    if(mFire.fireList.size()==0 && mElec.elecList.size()==0){
+                    if(mFire.fireList.size()==0 && mElec.elecList.size()==0 && elecBadge==true){
                         mMoving.movingField();
                         exitFlag=true;
                         break;
@@ -110,7 +111,7 @@ public class JobKetMonManager {
                 case 2:
                     Field electricField= new ElectricField();
                     electricField.introduce();
-                    menuIntoElec();
+                    elecBadge=mElec.callElectricField(mJobKiMonBox);
                     break;
 
                 case 3:
